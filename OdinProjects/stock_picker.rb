@@ -43,3 +43,19 @@ puts stock_picker(stock_array3).inspect
 #
 #   best_days
 # end
+#
+# From anoter user with edge case additions
+# def stock_picker(prices)
+#   best_pair = prices.each_with_index
+#                     .to_a
+#                     .combination(2)
+#                     .max_by { |buy, sell| sell[0] - buy[0] }
+#
+#   # Ensure the max profit is greater than 0; otherwise, return an empty array
+#   return [] if best_pair.nil? || best_pair[1][0] - best_pair[0][0] <= 0
+#
+#   best_pair.map { |price, i| i }
+# end
+#
+# input = [10, 9, 8, 7]
+# puts stock_picker(input).inspect # => []
