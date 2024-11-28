@@ -26,10 +26,10 @@ def stock_picker(day_price)
   min_max
 end
 
-puts stock_picker(stock_array)
-puts stock_picker(stock_array1)
-puts stock_picker(stock_array2)
-puts stock_picker(stock_array3)
+puts stock_picker(stock_array).inspect
+puts stock_picker(stock_array1).inspect
+puts stock_picker(stock_array2).inspect
+puts stock_picker(stock_array3).inspect
 
 # ChatGipities
 # def stock_picker(prices)
