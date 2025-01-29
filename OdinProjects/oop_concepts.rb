@@ -51,6 +51,10 @@ class Vehicle
   end
 end
 
+# MyTruck
+#
+# This class represents a specific type of vehicle, a truck.
+# It inherits from the Vehicle class and may have additional attributes or behaviors specific to trucks.
 class MyTruck < Vehicle
   include Towable
 
