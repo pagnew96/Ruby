@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module TicTacToe
+  # Player class
   class Player
     attr_reader :name, :marker
 
@@ -10,6 +11,7 @@ module TicTacToe
     end
   end
 
+  # Board class
   class Board
     require 'Matrix'
 
@@ -50,11 +52,13 @@ module TicTacToe
       end
 
       # Check diagonals
-      puts 'diagonals are'
-      puts Matrix.rows(board).each(:diagonal).to_a
-      # return true if Matrix.rows(array).each(:diagonal).to_a
-      # return true if @board[0][2] == @board[1][1] && @board[1][1] == @board[2][0] && @board[1][1] != ' '
+      # Get the main diagonal (top-left to bottom-right)
+      main_diagonal = (0..2).map { |i| matrix[i][i] }.uniq.size == 1 && matrix[0][0] != ' '
 
+      # Get the anti-diagonal (top-right to bottom-left)
+      anti_diagonal = (0..2).map { |i| matrix[i][2 - i] }.uniq.size == 1 && matrix[0][2] != ' '
+      
+      return main_diagonal || anti_diagonal
       false
     end
 
@@ -63,6 +67,7 @@ module TicTacToe
     end
   end
 
+  # Game class
   class Game
     def initialize
       @player1 = Player.new(get_name(1), 'X')
