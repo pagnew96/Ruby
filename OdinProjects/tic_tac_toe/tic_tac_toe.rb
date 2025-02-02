@@ -13,8 +13,6 @@ module TicTacToe
 
   # Board class
   class Board
-    require 'Matrix'
-
     attr_reader :board
 
     def initialize
@@ -41,25 +39,18 @@ module TicTacToe
     end
 
     def winner?
-      # Check rows
       @board.each do |row|
-        return true if row.all? { |cell| cell == row[0] && cell != ' ' }
+        return true if row.uniq.size == 1 && row[0] != ' '
       end
 
-      # Check columns
       @board.transpose.each do |column|
-        return true if column.all? { |cell| cell == column[0] && cell != ' ' }
+        return true if column.uniq.size == 1 && column[0] != ' '
       end
 
-      # Check diagonals
-      # Get the main diagonal (top-left to bottom-right)
-      main_diagonal = (0..2).map { |i| matrix[i][i] }.uniq.size == 1 && matrix[0][0] != ' '
+      main_diagonal = (0..2).map { |i| @board[i][i] }.uniq.size == 1 && @board[0][0] != ' '
+      anti_diagonal = (0..2).map { |i| @board[i][2 - i] }.uniq.size == 1 && @board[0][2] != ' '
 
-      # Get the anti-diagonal (top-right to bottom-left)
-      anti_diagonal = (0..2).map { |i| matrix[i][2 - i] }.uniq.size == 1 && matrix[0][2] != ' '
-      
-      return main_diagonal || anti_diagonal
-      false
+      main_diagonal || anti_diagonal
     end
 
     def draw?
@@ -86,7 +77,6 @@ module TicTacToe
       end
     end
 
-
     private
 
     def get_name(player_number)
@@ -110,8 +100,24 @@ module TicTacToe
     end
 
     def game_over?
-      @board.winner? || @board.draw?
+      if @board.winner?
+        display_winner
+        return true
+      elsif @board.draw?
+        display_draw
+        return true
+      end
+
       false
+    end
+
+    def display_winner
+      puts 'Winner Winner Chicken Dinner!!!'
+      puts "#{@selected_player.name} has won."
+    end
+
+    def display_draw
+      puts 'The game is a draw Bitches!!'
     end
   end
 end
