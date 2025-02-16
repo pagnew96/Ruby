@@ -3,7 +3,8 @@ module MasterMind
   class Game
     def initialize
       @guesses = 12
-      @code = Code.New
+      @code = Code.new
+      puts(@code.code.inspect)
     end
   end
 
@@ -17,6 +18,8 @@ module MasterMind
 
   # Code Class
   class Code
+    attr_reader :code
+
     def initialize
       @code = Array.new(4) { rand(1..6) }
     end
@@ -26,3 +29,5 @@ module MasterMind
     end
   end
 end
+
+MasterMind::Game.new
